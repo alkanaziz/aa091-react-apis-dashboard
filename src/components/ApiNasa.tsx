@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import ApiCard from "./ApiCard";
+import { NasaData, initialNasaData } from "../type";
 
 
 const ApiNasa = () => {
-	const [date, setDate] = useState("");
-	const [data, setData] = useState<{ url: string, title: string, explanation: string }>({});
+	const [date, setDate] = useState("2024-02-01");
+	const [nasaData, setNasaData] = useState<NasaData>(initialNasaData);
 	
 	const nasaApiKey = import.meta.env.VITE_NASA_API_KEY;
 	const url = `https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}&date=${date}`;
@@ -14,9 +15,9 @@ const ApiNasa = () => {
 		e.preventDefault();
 		(async () => {
 			const response = await axios.get(url);
-			const _data = response.data;
+			const _nasaData = response.data;
 			console.log(response);
-			setData(_data)
+			setNasaData(_nasaData)
 		})();
 	};
 
@@ -25,10 +26,10 @@ const ApiNasa = () => {
 			<ApiCard cardWidth="30rem">
 				<input value={date} onChange={(e) => setDate(e.target.value)} />
 				<button onClick={(e) => handleGetPhoto(e)}>Get photo of the day</button>
-				<p>Photo and explanation of the day</p>
-				<img src={data.url} alt="" />
-				<p>{data.title}</p>
-				<p>{data.explanation}</p>
+				<p>Photo and explanation of the day {nasaData.date} </p>
+				<img src={nasaData.url} alt="" />
+				<p>{nasaData.title}</p>
+				<p>{nasaData.explanation}</p>
 			</ApiCard>
 		</form>
 	);
