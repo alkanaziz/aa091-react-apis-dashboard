@@ -1,7 +1,11 @@
-import ApiDictionary from "../components/ApiDictionary"
+import ApiDictionary from "../components/ApiDictionary";
+import ApiNasa from "../components/ApiNasa";
 
 export const PageWelcome = () => {
 	return (
-		<ApiDictionary />
-	)
-}
+		<div className="flex gap-3 flex-wrap">
+			<ApiDictionary />
+			<ApiNasa />
+		</div>
+	);
+};

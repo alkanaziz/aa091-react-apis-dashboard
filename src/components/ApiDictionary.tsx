@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import ApiCard from "./ApiCard";
 
 const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
@@ -20,14 +21,14 @@ const ApiDictionary = () => {
 
 	return (
 		<form>
-			<div className="flex gap-5 flex-col bg-slate-200 p-6 w-[20rem] rounded">
+			<ApiCard>
 				<input value={word} onChange={(e) => setWord(e.target.value)} />
 				<button onClick={(e) => handleGetDefinition(e)}>
 					Get Definition
 				</button>
 				<p>Definition: </p>
 				<p>{definition}</p>
-			</div>
+			</ApiCard>
 		</form>
 	);
 };
